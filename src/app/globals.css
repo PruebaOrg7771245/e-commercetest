@@ -1,26 +1,24 @@
-@import "tailwindcss";
+/* src/app/globals.css */
+@import "tailwindcss"; /* importa todos los estilos base y utilidades de Tailwind */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Variables de color base del proyecto - reemplazan las de Geist que ya no usamos */
+  --background: #EFEDE7; /* piedra clara, el fondo general del sitio */
+  --foreground: #232320; /* texto principal, casi negro cálido */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Quitamos --font-sans y --font-mono de Geist - ya no aplican,
+     las fuentes ahora se controlan directo desde layout.tsx */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Quitamos el bloque @media (prefers-color-scheme: dark) a propósito:
+   para este boceto queremos controlar el look exacto sin que cambie
+   según la configuración del sistema operativo de quien lo vea */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
