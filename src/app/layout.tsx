@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Archivo, Inter } from "next/font/google"; // importamos las 2 fuentes que sí vamos a usar (quitamos Geist)
 import "./globals.css";
+import Header from "@/components/Header"; // importamos el nuevo encabezado global
 
 // Fuente para títulos - Archivo, en pesos semi-bold y bold
 const archivo = Archivo({
@@ -28,10 +29,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-       {/* cambiado de "en" a "es" ya que el sitio es en español */}
+    <html lang="es" suppressHydrationWarning>
       <body className={`${archivo.variable} ${inter.variable} font-[var(--font-body)] antialiased`}>
-        {/* aplicamos ambas variables de fuente + la fuente de cuerpo como default del body */}
+        {/* El Header se pone AQUÍ, fuera de {children} - así aparece
+            en TODAS las páginas (catálogo, detalle de producto, etc.)
+            sin tener que repetirlo en cada archivo individual */}
+        <Header />
         {children}
       </body>
     </html>
