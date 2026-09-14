@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 import { Archivo, Inter } from "next/font/google"; // importamos las 2 fuentes que sí vamos a usar (quitamos Geist)
 import "./globals.css";
-import Header from "@/components/Header"; // importamos el nuevo encabezado global
+import Header from "@/components/Header";
+import { CartProvider } from "@/context/CartContext"; // importamos el proveedor del carrito
 
 // Fuente para títulos - Archivo, en pesos semi-bold y bold
 const archivo = Archivo({
@@ -31,11 +32,13 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${archivo.variable} ${inter.variable} font-[var(--font-body)] antialiased`}>
-        {/* El Header se pone AQUÍ, fuera de {children} - así aparece
-            en TODAS las páginas (catálogo, detalle de producto, etc.)
-            sin tener que repetirlo en cada archivo individual */}
-        <Header />
-        {children}
+        {/* CartProvider envuelve TODO (Header incluido) para que tanto el
+            ícono del carrito como cualquier página puedan leer/modificar
+            el estado del carrito */}
+        <CartProvider>
+          <Header />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );
